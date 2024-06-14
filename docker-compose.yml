@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  tomcat:
+    build: .
+    ports:
+      # "host:container" 
+      - "8080:8080"
+    volumes:
+      - ./target/app-1:/usr/local/tomcat/webapps/ROOT
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m
