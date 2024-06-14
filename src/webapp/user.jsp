@@ -4,20 +4,10 @@
 <html>
 <head>
     <title>Users List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<h1>Users List</h1>
+<h1>Users List -- (user)</h1>
 <table border="1">
     <tr>
         <th>Name</th>
@@ -34,6 +24,6 @@
 <h1>User sample</h1>
 <c:out value="${userSample}" />
 <h1>Path Info</h1>
-<c:out value="${pathInfo}" />
+<c:out value="${path}" />
 </body>
 </html>

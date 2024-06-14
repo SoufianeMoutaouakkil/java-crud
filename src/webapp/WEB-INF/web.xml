@@ -19,4 +19,13 @@
         <servlet-name>ServletParamName</servlet-name>
         <url-pattern>/demo</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.users.UserDetail</servlet-class>
+    </servlet>
+    <!-- <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <!-- any url that follow /user/{id} -->
+        <url-pattern>/detailuser</url-pattern>
+    </servlet-mapping> -->
 </web-app>
