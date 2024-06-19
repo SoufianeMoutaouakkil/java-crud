@@ -90,6 +90,33 @@ public class TaskModel extends Model {
         }
     }
 
+    public List<Task> getByUserId(int userId) throws RuntimeException {
+        String sql = "SELECT * FROM tasks WHERE user_id = ?";
+        List<Task> tasks = new ArrayList<>();
+
+        try {
+            PreparedStatement stmt = DB.getPreparedStatement(sql);
+            stmt.setInt(1, userId);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                Task task = new Task(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getString("status"),
+                        resultSet.getInt("user_id"));
+                tasks.add(task);
+            }
+
+            resultSet.close();
+            return tasks;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to get the tasks");
+        }
+    }
+
     @Override
     protected void createTable() {
         String sql = "CREATE TABLE tasks (" +

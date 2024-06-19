@@ -3,4 +3,4 @@
 @REM password: <empty>
 @REM sql file: users.sql
 
-mysql -u root < users.sql
+mysql -u root < db.sql

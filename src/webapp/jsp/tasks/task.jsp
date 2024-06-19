@@ -2,7 +2,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="ctag" %>
 
 
-<ctag:layout title="User detail">
-    <h1>User detail</h1>
-    <c:out value="${user}" />
+<ctag:layout title="Task detail">
+    <h1>Task detail</h1>
+    <c:out value="${task}" />
 </ctag:layout>

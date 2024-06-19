@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.utils.Logger;
 import app.utils.Security;
 import app.utils.Validator;
 
@@ -18,6 +19,12 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String name, String email, String password) throws Exception {
+        this.setName(name);
+        this.setEmail(email);
+        this.setPassword(password);
     }
 
     // Getters and Setters
@@ -59,12 +66,16 @@ public class User {
         return password;
     }
 
-    public boolean checkPassword(String password) throws Exception {
-        if (Security.verifyPassword(password, this.password)) {
-            return true;
-        } else {
-            return false;
+    public boolean checkPassword(String password) {
+        try {
+
+            if (Security.verifyPassword(password, this.password)) {
+                return true;
+            }
+        } catch (Exception e) {
+            Logger.log("User checkPassword: error", e.getMessage());
         }
+        return false;
     }
 
     // Override toString() for easy printing

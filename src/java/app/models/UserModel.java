@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UserModel extends Model {
 
     public UserModel() {
@@ -52,8 +51,32 @@ public class UserModel extends Model {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("password")
-                );
+                        resultSet.getString("password"));
+            }
+
+            resultSet.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to get the user");
+        }
+    }
+
+    public User getByEmail(String email) throws RuntimeException {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        User user = null;
+
+        try {
+            PreparedStatement pstmt = DB.getPreparedStatement(sql);
+            pstmt.setString(1, email);
+            ResultSet resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"));
             }
 
             resultSet.close();
@@ -77,8 +100,7 @@ public class UserModel extends Model {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getString("email"),
-                        resultSet.getString("password")
-                );
+                        resultSet.getString("password"));
                 users.add(user);
             }
 

@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Users List</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <h1>Users List -- (user)</h1>
@@ -23,7 +23,13 @@
 
 <h1>User sample</h1>
 <c:out value="${userSample}" />
-<h1>Path Info</h1>
-<c:out value="${path}" />
+<h1>Servlet Path</h1>
+<c:out value="${servletPath}" />
+<h1>Request Path</h1>
+<c:out value="${requestPath}" />
+<h1>PI</h1>
+<c:out value="${pi}" />
+<h1>User id:</h1>
+<c:out value="${userId}" />
 </body>
 </html>
