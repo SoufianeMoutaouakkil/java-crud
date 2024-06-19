@@ -9,8 +9,9 @@ import app.entities.Task;
 import app.entities.User;
 import app.models.TaskModel;
 import app.utils.Logger;
+import jakarta.servlet.annotation.WebFilter;
 
-@jakarta.servlet.annotation.WebFilter(urlPatterns = { "/tasks/edit/*", "/tasks/delete/*" })
+@WebFilter(urlPatterns = { "/tasks/edit/*", "/tasks/delete/*" })
 public class TaskFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
