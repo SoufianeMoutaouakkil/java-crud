@@ -1,4 +1,4 @@
-package com.servlets.errors;
+package servlets.servlets.errors;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

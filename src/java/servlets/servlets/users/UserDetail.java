@@ -1,4 +1,4 @@
-package com.servlets.users;
+package servlets.servlets.users;
 
 import app.models.UserModel;
 import app.utils.Logger;

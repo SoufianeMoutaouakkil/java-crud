@@ -1,4 +1,4 @@
-package com.filters;
+package servlets.filters;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -9,11 +9,10 @@ import jakarta.servlet.ServletResponse;
 import java.io.IOException;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletResponse;
-
-import java.io.BufferedReader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-// JsonPrimitive
+
+import java.io.BufferedReader;
 
 @WebFilter(urlPatterns = { "/profile/edit" })
 public class JsonFilter implements Filter {

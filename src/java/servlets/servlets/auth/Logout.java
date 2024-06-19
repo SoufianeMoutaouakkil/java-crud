@@ -1,4 +1,4 @@
-package com.servlets.auth;
+package servlets.servlets.auth;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

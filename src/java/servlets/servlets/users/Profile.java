@@ -1,13 +1,13 @@
-package com.servlets.users;
+package servlets.servlets.users;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 
 import java.io.IOException;
-import com.google.gson.JsonObject;
 
 import app.entities.User;
 import app.models.UserModel;

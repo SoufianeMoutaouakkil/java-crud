@@ -1,4 +1,4 @@
-package com.servlets.tasks;
+package servlets.servlets.tasks;
 
 import app.models.TaskModel;
 import app.utils.Logger;
