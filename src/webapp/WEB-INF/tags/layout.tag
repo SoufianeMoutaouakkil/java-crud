@@ -20,7 +20,7 @@
     <div class="container-fluid d-flex flex-column justify-content-between align-items-center h-100">
         <main class="container">
             <jsp:include page="/WEB-INF/tags/header.jsp" />
-            <div class="container" style="min-width: 50%;width: fit-content;">
+            <div class="container" style="min-width: 75%;width: fit-content;">
                 <jsp:doBody />
             </div>
         </main>

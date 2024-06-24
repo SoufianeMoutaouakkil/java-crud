@@ -24,8 +24,10 @@ public class AuthFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         // Check if the user is authenticated
-        if (isAuthenticated(httpRequest)) {
+        User user = getUser(httpRequest);
+        if (user != null) {
             // User is authenticated, proceed with the request
+            request.setAttribute("user", user);
             chain.doFilter(request, response);
         } else {
             // User is not authenticated, redirect to login page
@@ -38,10 +40,10 @@ public class AuthFilter implements Filter {
         System.out.println("Destroying AuthFilter");
     }
 
-    private boolean isAuthenticated(HttpServletRequest request) {
+    private User getUser(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("user");
         String userString = user != null ? user.toString() : "null";
         Logger.log("AuthFilter isAuthenticated: user", userString);
-        return user != null;
+        return user;
     }
 }
