@@ -12,8 +12,9 @@ import java.io.IOException;
 import app.entities.User;
 import app.models.UserModel;
 import app.utils.Logger;
+import app.utils.Validator;
 
-@WebServlet(name = "Profile", urlPatterns = { "/profile", "/profile/change-password", "/profile/edit",
+@WebServlet(name = "Profile", urlPatterns = { "/profile", "/api/profile/change-password", "/api/profile/edit",
         "/profile/delete" })
 public class Profile extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -29,7 +30,7 @@ public class Profile extends HttpServlet {
         response.setContentType("application/json");
         JsonObject data = (JsonObject) request.getAttribute("data");
         try {
-            if (path.equals("/profile/edit")) {
+            if (path.equals("/api/profile/edit")) {
                 String email = data.get("email").getAsString();
                 String name = data.get("name").getAsString();
                 Logger.log("Edit profile", "Email: " + email + ", Name: " + name);
@@ -46,13 +47,29 @@ public class Profile extends HttpServlet {
                     request.getSession().setAttribute("user", user);
                     response.getWriter().write("{\"message\": \"User updated successfully\"}");
                 }
-            } else if (path.equals("/profile/change-password")) {
-                response.setContentType("application/json");
-                String password = request.getParameter("password");
-                user.setPassword(password);
-                userModel.update(user);
-                response.getWriter().write("{\"message\": \"Password updated successfully\"}");
-                return;
+            } else if (path.equals("/api/profile/change-password")) {
+                String password = data.get("newPassword").getAsString();
+                String confirmPassword = data.get("confirmPassword").getAsString();
+                if (Validator.isValidPassword(confirmPassword) == false) {
+                    response.setStatus(400);
+                    response.getWriter().write("{\"message\": \"Invalid password\"}");
+                    return;
+                }
+                if (!password.equals(confirmPassword)) {
+                    response.setStatus(400);
+                    response.getWriter().write("{\"message\": \"Passwords do not match\"}");
+                    return;
+                }
+                try {
+                    user.setPassword(password);
+                    userModel.update(user);
+                    response.getWriter().write("{\"message\": \"Password updated successfully\"}");
+                    return;
+                } catch (Exception e) {
+                    response.setStatus(400);
+                    response.getWriter().write("{\"message\": \"" + e.getMessage() + "\"}");
+                    return;
+                }
             } else if (path.equals("/profile/delete")) {
                 userModel.delete(user.getId());
                 request.getSession().invalidate();

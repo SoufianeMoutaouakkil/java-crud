@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 import java.io.BufferedReader;
 
-@WebFilter(urlPatterns = { "/profile/edit" })
+@WebFilter(urlPatterns = { "/api/*" })
 public class JsonFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
