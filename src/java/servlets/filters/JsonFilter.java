@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import app.utils.JsonData;
+
 import java.io.BufferedReader;
 
 @WebFilter(urlPatterns = { "/api/*" })
@@ -32,7 +34,7 @@ public class JsonFilter implements Filter {
         Gson gson = new Gson();
         try {
             JsonObject jsonObject = gson.fromJson(jsonString, JsonObject.class);
-            request.setAttribute("data", jsonObject);
+            request.setAttribute("data", new JsonData(jsonObject));
         } catch (Exception e) {
             response.getWriter().write("{\"message\": \"Invalid JSON\"}");
             // set status code to 400
@@ -40,7 +42,6 @@ public class JsonFilter implements Filter {
             response.setContentType("application/json");
             return;
         }
-        
 
         chain.doFilter(request, response);
     }

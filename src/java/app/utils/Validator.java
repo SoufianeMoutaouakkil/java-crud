@@ -15,4 +15,8 @@ public class Validator {
     public static boolean isValidPassword(String password) {
         return password.matches(RX_PASSWORD);
     }
+
+    public static boolean isValidId(String id) {
+        return id.matches(RX_ID);
+    }
 }

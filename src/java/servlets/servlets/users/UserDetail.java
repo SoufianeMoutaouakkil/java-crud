@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
-import java.net.URLEncoder;
 
 @WebServlet(name = "User", urlPatterns = { "/users/*" })
 public class UserDetail extends HttpServlet {
@@ -23,13 +22,12 @@ public class UserDetail extends HttpServlet {
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
-            String message = "Invalid user id";
-            response.sendRedirect("/errors/user?error=bad_request&message=" + URLEncoder.encode(message, "UTF-8"));
+            response.sendRedirect("/errors/user?error=bad_request&id=" + id);
             return;
         }
         User user = new UserModel().getById(Integer.parseInt(id));
         if (user == null) {
-            response.sendRedirect("/errors/user?error=not_found&userId=" + id);
+            response.sendRedirect("/errors/user?error=not_found&id=" + id);
             return;
         }
         request.setAttribute("user", user);

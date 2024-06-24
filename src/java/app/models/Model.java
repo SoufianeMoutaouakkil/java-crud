@@ -27,5 +27,15 @@ public abstract class Model {
         }
     }
 
+    public void delete(int id) {
+        try {
+            Statement stmt = DB.getStatement();
+            stmt.executeUpdate("DELETE FROM " + table + " WHERE id = " + id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to delete the record");
+        }
+    }
+
     protected abstract void createTable();
 }

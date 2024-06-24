@@ -2,7 +2,9 @@ CREATE DATABASE IF NOT EXISTS `crud_demo`;
 
 USE `crud_demo`;
 
+DROP TABLE IF EXISTS `tasks`;
 DROP TABLE IF EXISTS `users`;
+
 
 CREATE TABLE
     `users` (
@@ -41,8 +43,6 @@ VALUES
 UNLOCK TABLES;
 
 -- create task table
-DROP TABLE IF EXISTS `tasks`;
-
 CREATE TABLE
     `tasks` (
         `id` int (11) NOT NULL AUTO_INCREMENT,

@@ -117,6 +117,46 @@ public class TaskModel extends Model {
         }
     }
 
+    public void update(Task task) throws RuntimeException {
+        String sql = "UPDATE tasks SET ";
+
+        if (task.getName() != null) {
+            sql += "name = ?, ";
+        }
+        if (task.getDescription() != null) {
+            sql += "description = ?, ";
+        }
+        if (task.getStatus() != null) {
+            sql += "status = ?, ";
+        }
+
+        // remove the last comma and space
+        sql = sql.substring(0, sql.length() - 2);
+        sql += " WHERE id = ?";
+
+        try {
+            PreparedStatement pstmt = DB.getPreparedStatement(sql);
+            int index = 1;
+            if (task.getName() != null) {
+                pstmt.setString(index, task.getName());
+                index++;
+            }
+            if (task.getDescription() != null) {
+                pstmt.setString(index, task.getDescription());
+                index++;
+            }
+            if (task.getStatus() != null) {
+                pstmt.setString(index, task.getStatus());
+                index++;
+            }
+            pstmt.setInt(index, task.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to update the task");
+        }
+    }
+
     @Override
     protected void createTable() {
         String sql = "CREATE TABLE tasks (" +

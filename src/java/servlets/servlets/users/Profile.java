@@ -4,7 +4,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.google.gson.JsonObject;
 import jakarta.servlet.ServletException;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import app.entities.User;
 import app.models.UserModel;
 import app.utils.Logger;
 import app.utils.Validator;
+import app.utils.JsonData;
 
 @WebServlet(name = "Profile", urlPatterns = { "/profile", "/api/profile/change-password", "/api/profile/edit",
         "/profile/delete" })
@@ -28,11 +28,11 @@ public class Profile extends HttpServlet {
         UserModel userModel = new UserModel();
         String path = request.getServletPath();
         response.setContentType("application/json");
-        JsonObject data = (JsonObject) request.getAttribute("data");
+        JsonData data = (JsonData) request.getAttribute("data");
         try {
             if (path.equals("/api/profile/edit")) {
-                String email = data.get("email").getAsString();
-                String name = data.get("name").getAsString();
+                String email = data.getString("email");
+                String name = data.getString("name");
                 Logger.log("Edit profile", "Email: " + email + ", Name: " + name);
                 if (!email.equals(user.getEmail()) && userModel.getByEmail(email) != null) {
                     // send json response with 400 status code
@@ -48,8 +48,8 @@ public class Profile extends HttpServlet {
                     response.getWriter().write("{\"message\": \"User updated successfully\"}");
                 }
             } else if (path.equals("/api/profile/change-password")) {
-                String password = data.get("newPassword").getAsString();
-                String confirmPassword = data.get("confirmPassword").getAsString();
+                String password = data.getString("newPassword");
+                String confirmPassword = data.getString("confirmPassword");
                 if (Validator.isValidPassword(confirmPassword) == false) {
                     response.setStatus(400);
                     response.getWriter().write("{\"message\": \"Invalid password\"}");

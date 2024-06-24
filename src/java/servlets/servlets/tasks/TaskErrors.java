@@ -10,7 +10,7 @@ import java.io.IOException;
 @WebServlet(name = "TaskErrors", urlPatterns = { "/errors/task" })
 public class TaskErrors extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String error = request.getParameter("type");
+        String error = request.getParameter("error");
         String id = request.getParameter("id");
 
         if (error.equals("not_found")) {
