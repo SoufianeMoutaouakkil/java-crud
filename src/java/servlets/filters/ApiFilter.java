@@ -16,11 +16,12 @@ import app.utils.JsonData;
 
 import java.io.BufferedReader;
 
-@WebFilter(urlPatterns = { "/api/*" })
-public class JsonFilter implements Filter {
+@WebFilter(urlPatterns = { "/api/*" }, filterName = "ApiFilter")
+public class ApiFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        System.out.println("ApiFilter doFilter");
         StringBuilder jsonBuffer = new StringBuilder();
         String line;
         try (BufferedReader reader = request.getReader()) {

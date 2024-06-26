@@ -9,7 +9,7 @@ import app.entities.User;
 import app.utils.Logger;
 import jakarta.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = { "/users/*", "/errors/*", "/logout", "/profile", "/profile/*", "/tasks", "/tasks/*", "/api/*" })
+@WebFilter(filterName = "AuthFilter", urlPatterns = { "/users/*", "/errors/*", "/logout", "/profile", "/profile/*", "/tasks", "/tasks/*", "/api/*" })
 public class AuthFilter implements Filter {
 
     @Override
@@ -20,6 +20,7 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        System.out.println("AuthFilter doFilter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 

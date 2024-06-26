@@ -31,7 +31,6 @@ function handleTaskNameEdit(event) {
   input.type = "text";
   input.value = name;
   input.classList.add("form-control");
-  input.addEventListener("blur", handleTaskNameUpdate);
   input.addEventListener("keypress", handleTaskNameUpdate);
   td.innerHTML = "";
   td.appendChild(input);
@@ -45,7 +44,6 @@ function handleTaskDescriptionEdit(event) {
   input.type = "text";
   input.value = description;
   input.classList.add("form-control");
-  input.addEventListener("blur", handleTaskDescriptionUpdate);
   input.addEventListener("keypress", handleTaskDescriptionUpdate);
   td.innerHTML = "";
   td.appendChild(input);

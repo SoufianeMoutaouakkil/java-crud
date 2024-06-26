@@ -12,8 +12,8 @@ import java.util.List;
 import app.utils.Logger;
 import app.entities.User;
 
-@WebServlet(name = "Tasks", urlPatterns = { "/tasks" })
-public class Taks extends HttpServlet {
+@WebServlet(name = "TasksServlet", urlPatterns = { "/tasks" })
+public class TasksServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Logger.log("Tasks doGet", request.getPathInfo());
         User user = (User) request.getSession().getAttribute("user");
