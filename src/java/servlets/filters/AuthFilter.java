@@ -9,7 +9,7 @@ import app.entities.User;
 import app.utils.Logger;
 import jakarta.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = { "/users/*", "/errors/*", "/logout", "/profile", "/profile/*", "/tasks", "/tasks/*" })
+@WebFilter(urlPatterns = { "/users/*", "/errors/*", "/logout", "/profile", "/profile/*", "/tasks", "/tasks/*", "/api/*" })
 public class AuthFilter implements Filter {
 
     @Override

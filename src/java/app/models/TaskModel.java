@@ -16,15 +16,13 @@ public class TaskModel extends Model {
     }
 
     public Task create(Task task) throws RuntimeException {
-        String sql = "INSERT INTO tasks (name, description, user_id, status) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO tasks (name, user_id, status) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement pstmt = DB.getPreparedStatement(sql);
             pstmt.setString(1, task.getName());
-            pstmt.setString(2, task.getDescription());
-            pstmt.setInt(3, task.getUserId());
-            // set the default status to 'todo' if not provided
-            pstmt.setString(4, task.getStatus() != null ? task.getStatus() : Task.STATUS_TODO);
+            pstmt.setInt(2, task.getUserId());
+            pstmt.setString(3, Task.STATUS_TODO);
             pstmt.executeUpdate();
             // return the id of the new task
             ResultSet rs = pstmt.getGeneratedKeys();

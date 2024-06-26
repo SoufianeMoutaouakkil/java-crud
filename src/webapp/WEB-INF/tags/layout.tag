@@ -18,9 +18,9 @@
 <body class="bg-light h-100">
     <%-- justify-content : space-between --%>
     <div class="container-fluid d-flex flex-column justify-content-between align-items-center h-100">
-        <main class="container">
+        <main class="container flex-grow-1 d-flex flex-column">
             <jsp:include page="/WEB-INF/tags/header.jsp" />
-            <div class="container" style="min-width: 75%;width: fit-content;">
+            <div class="container flex-grow-1 d-flex flex-column" style="min-width: 75%;width: fit-content;">
                 <jsp:doBody />
             </div>
         </main>

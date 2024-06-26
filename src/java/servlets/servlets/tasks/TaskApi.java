@@ -2,6 +2,7 @@ package servlets.servlets.tasks;
 
 import app.models.TaskModel;
 import app.entities.Task;
+import app.entities.User;
 import app.utils.Logger;
 import app.utils.JsonData;
 import app.utils.Validator;
@@ -13,8 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 
-
-@WebServlet(name = "Task", urlPatterns = { "/api/tasks/*", "/tasks/" })
+@WebServlet(name = "Task", urlPatterns = { "/api/tasks/*" })
 public class TaskApi extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,8 +22,13 @@ public class TaskApi extends HttpServlet {
         response.setContentType("application/json");
         String requestPath = request.getPathInfo();
         String id = requestPath.substring(requestPath.lastIndexOf("/") + 1);
-        String action = requestPath.substring(1, requestPath.lastIndexOf("/"));
-        if (Validator.isValidId(id) == false) {
+        String action = "";
+        if (requestPath.lastIndexOf("/") == 0) {
+            action = id;
+        } else {
+            action = requestPath.substring(1, requestPath.lastIndexOf("/"));
+        }
+        if (Validator.isValidId(id) == false && action.equals("create") == false) {
             response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid task id: " + id + "\"}");
             return;
         }
@@ -44,6 +49,16 @@ public class TaskApi extends HttpServlet {
             new TaskModel().update(task);
 
             response.getWriter().write("{\"status\": \"success\", \"message\": \"Task updated\"}");
+        } else if (action.equals("create")) {
+            JsonData data = (JsonData) request.getAttribute("data");
+            String name = data.getString("name");
+            User user = (User) request.getAttribute("user");
+            Task task = new Task();
+            task.setName(name);
+            task.setUserId(user.getId());
+            new TaskModel().create(task);
+
+            response.getWriter().write("{\"status\": \"success\", \"message\": \"Task created\"}");
         } else {
             response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid action " + action + "\"}");
         }

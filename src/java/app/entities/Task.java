@@ -51,9 +51,10 @@ public class Task {
     }
 
     public void setStatus(String status) {
-        if (status.equals(STATUS_TODO) || status.equals(STATUS_DONE)) {
-            this.status = status;
+        if (status == null || status.equals(STATUS_TODO)) {
+            this.status = STATUS_TODO;
         } else {
+            this.status = STATUS_DONE;
         }
     }
 
