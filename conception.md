@@ -1,5 +1,4 @@
 <!-- Project title -->
-
 # To-Do List with JSP and Servlets
 
 ## Description
